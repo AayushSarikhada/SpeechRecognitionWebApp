@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+  <link rel="stylesheet" href="blurEffect.css" />
+  <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+
+  <title>Speech To Text</title>
+
+
+
+  <script>
+    function copy(e) {
+      str = document.getElementById('final').textContent;
+      const el = document.createElement('textarea');
+      el.value = str;
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand('copy');
+      document.body.removeChild(el);
+      alert('Copied the text:' + el.value);
+    }
+  </script>
+
+  <script type="text/javascript">
+    function toggle() {
+      var blur = document.getElementById('blur')
+      blur.classList.toggle('active')
+  
+      var popup = document.getElementById('popup')
+      popup.classList.toggle('active')
+    }
+  </script>
+</head>
+
+<body class="container pt-5 " onload="myFunction()"
+  style="background-color: rgba(134, 134, 134, 0.942); margin-top: 1px;">
+
+  <div class="contentParent" id="blur">
+
+    <div class="mt-4" id="div_language">
+
+      <h2 class="mb-3 text-light">Select Language</h2>
+      <select class="form-select bg-secondary text-light" id="select_language" onchange="updateCountry()"></select>
+      <select class="form-select bg-secondary text-light mt-2" id="select_dialect"></select>
+    </div>
+
+    <h2 class="mt-4 text-white" id="res_box">Transcript</h2>
+    <div class="p-3" id="cpp">
+      <textarea id="final" class="form-control bg-secondary text-light"
+        style="border: 1px solid rgb(215, 214, 214); height: 260px; width: 1290px; margin-left: -20px; border-radius: 5px;">
+
+      </textarea>
+
+      <!-- <span id="interim" class="text-light"></span> -->
+    </div>
+
+    <div class="mt-4">
+      <button class="btn btn-success" id="start">Start</button>
+      <button class="btn btn-danger" style=" margin-left: 20px;" id="stop">Stop</button>
+      <button class="btn btn-primary" style="margin-left:20px" id="cp_btn" onclick="copy(this)">Copy</button>
+      <button class="btn btn-primary" style="margin-left:20px" id="tr_button" onclick="toggle()">Summary</button>
+      <p id="status" class="lead mt-3 text-light" style="display: none">Listenting ...</p>
+    </div>
+  </div>
+
+  <div id="popup">
+    <h2>Summary</h2><br>
+    <div class="p-3" id="cpp">
+      <textarea id="final" class="form-control bg-secondary text-light"
+        style="border: 1px solid rgb(215, 214, 214); height: 260px; width: 500px; margin-left: -20px; border-radius: 5px;">
+
+        </textarea>
+    </div>
+
+    <a  onclick="toggle()">Back</a>
+  </div>
+
+  <!-- <script>
+    var preloader = document.getElementById('loading');
+    function myFunction() {
+      var delayInMilliseconds = 1000; //1 second
+
+      setTimeout(function () {
+        //your code to be executed after 1 second
+        preloader.style.display = 'none';
+      }, delayInMilliseconds);
+      
+
+    }
+  </script> -->
+
+</body>
+
+<script src="./js/speechRecognition.js"></script>
+<script src="./js/language.js"></script>
+
+
+
+</html>

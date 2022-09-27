@@ -33,10 +33,18 @@ if ("webkitSpeechRecognition" in window) {
   };
 
   document.querySelector("#start").onclick = () => {
+    final_transcript = ""
+    // document.getElementById("final").value = " abc"
+    // document.getElementById("final").innerText = ""
+    // document.getElementById("final").value = ""
+
     speechRecognition.start();
+    new Audio("../mic-start.mp3").play();
   };
+
   document.querySelector("#stop").onclick = () => {
     speechRecognition.stop();
+    new Audio("../mic-end.mp3").play();
   };
 } else {
   console.log("Speech Recognition Not Available");
